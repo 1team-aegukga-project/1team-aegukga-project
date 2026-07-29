@@ -116,9 +116,26 @@ gitGraph
 
 ## 6. 진행 방법
 
-### 6-1. 팀장: 로컬 Git 저장소 만들고 GitHub에 올리기
+### 6-1. 팀장: 팀 전용 GitHub Organization 만들기
 
-1. 팀장은 강사가 배포한 시작 프로젝트(`aegukga-project` 폴더)를 받아 로컬에 준비합니다.
+이번 실습은 강사가 미리 만들어 둔 Organization이 아니라, **팀장이 직접 새 Organization을 생성**해서 그 안에서 진행합니다.
+
+1. GitHub 우측 상단의 **+** 버튼을 클릭하고 **New organization**을 선택합니다. (또는 https://github.com/organizations/new 로 바로 접속)
+2. 요금제 선택 화면에서 **Free** 플랜을 선택합니다.
+3. Organization 이름을 입력합니다. (GitHub 전체에서 유일해야 하는 이름입니다. 예: `team1-aegukga`처럼 팀을 구분할 수 있는 이름을 추천합니다)
+4. "This organization belongs to" 단계에서 **My personal account**를 선택하고 계속 진행합니다.
+5. 팀원 초대 화면이 나오면 여기서 바로 초대해도 되고, 건너뛰고 6-2에서 따로 진행해도 됩니다.
+
+### 6-2. 팀장: Organization에 팀원 초대
+
+1. 방금 만든 Organization 페이지 상단의 **People** 탭으로 이동합니다.
+2. 우측의 **Invite member** 버튼을 클릭합니다.
+3. 팀원 3명의 GitHub 아이디를 검색해 초대를 보냅니다.
+4. 팀원들은 이메일 또는 GitHub 알림으로 받은 초대를 수락하면 Organization 멤버가 됩니다.
+
+### 6-3. 팀장: 이 프로젝트를 본따 실습용 저장소 만들고 push
+
+1. 팀장은 강사가 배포한 시작 프로젝트(`aegukga-project` 폴더, 지금 보고 있는 이 프로젝트)를 받아 로컬에 준비합니다.
 2. 해당 폴더에서 Git 저장소를 초기화하고 첫 커밋을 남깁니다.
    ```bash
    $ cd aegukga-project
@@ -126,33 +143,26 @@ gitGraph
    $ git add .
    $ git commit -m "Initial commit"
    ```
-3. GitHub Organization(`20260728-saltlux-llm-agent-service-1st`) 안에 팀별 원격 저장소를 새로 생성합니다. (저장소 이름 규칙은 강사 안내를 따르세요. 예: `team1-aegukga-project`)
+3. 방금 만든 팀 Organization 안에 새 원격 저장소를 생성합니다. (저장소 이름 예: `aegukga-project`)
 4. 로컬 저장소와 원격 저장소를 연결하고 push합니다.
    ```bash
-   $ git remote add origin https://github.com/20260728-saltlux-llm-agent-service-1st/team1-aegukga-project.git
+   $ git remote add origin https://github.com/팀-organization-이름/aegukga-project.git
    $ git branch -M main
    $ git push -u origin main
    ```
 
-### 6-2. 팀장: 팀원 초대 (필요한 경우)
+> 💡 Organization 멤버로 초대되었더라도, Organization의 기본 저장소 권한 설정에 따라 곧바로 push 권한이 없을 수 있습니다. 팀원이 push할 때 권한 오류가 난다면, 팀장이 저장소의 **Settings → Collaborators and teams**에서 팀원을 **Write** 권한으로 직접 추가해주세요.
 
-Organization 멤버라도 저장소별 접근 권한은 따로 부여해야 할 수 있습니다. push가 안 되는 팀원이 있다면 팀장이 아래 방법으로 초대해주세요.
-
-1. 방금 만든 저장소 페이지에서 **Settings** 탭으로 이동합니다.
-2. 왼쪽 메뉴에서 **Collaborators and teams**(또는 Collaborators)를 클릭합니다.
-3. **Add people** 버튼을 눌러 팀원 3명의 GitHub 아이디를 검색해 초대합니다.
-4. 팀원들은 이메일 또는 GitHub 알림으로 받은 초대를 수락합니다.
-
-### 6-3. 팀원: Clone
+### 6-4. 팀원: Clone
 
 나머지 팀원 3명은 팀장이 알려준 저장소 주소로 clone합니다.
 
 ```bash
-$ git clone https://github.com/20260728-saltlux-llm-agent-service-1st/team1-aegukga-project.git
-$ cd team1-aegukga-project
+$ git clone https://github.com/팀-organization-이름/aegukga-project.git
+$ cd aegukga-project
 ```
 
-### 6-4. 각자 feature 브랜치 생성 후 작업·커밋·push
+### 6-5. 각자 feature 브랜치 생성 후 작업·커밋·push
 
 팀장을 포함한 모든 팀원은 **자신의 소절 담당 브랜치를 `main`에서 새로 만들어** 작업합니다.
 
@@ -179,7 +189,7 @@ $ cd team1-aegukga-project
    ```
    > 이 push는 각자 **자신만의 브랜치**로 올라가기 때문에, 진행 순서와 상관없이 언제 push해도 다른 팀원과 절대 충돌하지 않습니다.
 
-### 6-5. 각자 Pull Request 생성
+### 6-6. 각자 Pull Request 생성
 
 1. 방금 push한 저장소 페이지로 이동하면, 상단에 노란색 배너로 **"Compare & pull request"** 버튼이 자동으로 나타납니다. 안 보이면 **Pull requests** 탭 → **New pull request**를 클릭하세요.
 2. `base: main` ← `compare: feature/마르고-닳도록`으로 설정되어 있는지 확인합니다.
@@ -187,7 +197,7 @@ $ cd team1-aegukga-project
 4. **내용(Description)**: 예) "1절 두 번째 소절 '마르고 닳도록'을 추가했습니다."
 5. **Create pull request** 버튼을 클릭합니다.
 
-### 6-6. 팀원 리뷰: 서로의 PR을 Approve
+### 6-7. 팀원 리뷰: 서로의 PR을 Approve
 
 1. **Pull requests** 탭에서 다른 팀원이 올린 PR을 열어봅니다.
 2. **Files changed** 탭에서 어떤 줄이 추가되었는지 diff를 확인합니다.
@@ -195,7 +205,7 @@ $ cd team1-aegukga-project
 
 > 💡 GitHub는 기본적으로 **자기 자신의 PR은 스스로 Approve할 수 없습니다.** 그러니 자연스럽게 다른 팀원이 내 PR을 봐줘야 하고, 나도 다른 팀원의 PR을 봐줘야 합니다. 4명 모두의 PR이 생성되면, 서로 돌아가며 Approve해주세요.
 
-### 6-7. 정해진 순서대로 PR Merge
+### 6-8. 정해진 순서대로 PR Merge
 
 4-2에서 정한 **merge 순서**대로, 한 명씩 차례로 자신의 PR을 merge합니다.
 
@@ -207,9 +217,9 @@ $ cd team1-aegukga-project
 This branch has conflicts that must be resolved
 ```
 
-당황하지 말고, 아래 6-8 순서대로 충돌을 해결한 뒤 다시 merge를 시도하면 됩니다.
+당황하지 말고, 아래 6-9 순서대로 충돌을 해결한 뒤 다시 merge를 시도하면 됩니다.
 
-### 6-8. 충돌 해결하기
+### 6-9. 충돌 해결하기
 
 충돌은 로컬(터미널/IntelliJ)에서 해결하는 것을 기본으로 안내합니다. (GitHub 웹의 **Resolve conflicts** 버튼으로 웹 에디터에서 직접 해결하는 것도 가능하지만, 실무에서는 로컬에서 해결하는 경우가 훨씬 많습니다.)
 
@@ -256,9 +266,9 @@ This branch has conflicts that must be resolved
    ```
 7. GitHub의 PR 페이지를 새로고침하면 충돌 표시가 사라지고 **Merge pull request** 버튼이 다시 활성화됩니다. 클릭해서 merge를 완료합니다.
 
-### 6-9. 남은 순서 반복
+### 6-10. 남은 순서 반복
 
-3번, 4번 순서 팀원도 자기 차례가 되면 **6-7 ~ 6-8과 동일한 과정**(merge 시도 → 충돌 표시 → main 최신화 → 내 브랜치에 merge → 충돌 해결 → commit → push → PR merge)을 반복합니다. `main`을 최신화하는 시점에는 이미 이전 사람들의 가사가 순서대로 쌓여있으므로, **자신의 소절을 가사 순서상 올바른 위치에 끼워 넣는 것**이 핵심입니다.
+3번, 4번 순서 팀원도 자기 차례가 되면 **6-8 ~ 6-9와 동일한 과정**(merge 시도 → 충돌 표시 → main 최신화 → 내 브랜치에 merge → 충돌 해결 → commit → push → PR merge)을 반복합니다. `main`을 최신화하는 시점에는 이미 이전 사람들의 가사가 순서대로 쌓여있으므로, **자신의 소절을 가사 순서상 올바른 위치에 끼워 넣는 것**이 핵심입니다.
 
 예를 들어 3번째 팀원("하느님이 보우하사" 담당)이 충돌을 해결한다면:
 
@@ -271,7 +281,7 @@ This branch has conflicts that must be resolved
         // 후렴구 출력부
 ```
 
-### 6-10. 전체 팀원 동기화 및 확인
+### 6-11. 전체 팀원 동기화 및 확인
 
 모든 PR이 merge되면, 각자 로컬에서 `main`으로 돌아가 최신 상태를 받아옵니다.
 
