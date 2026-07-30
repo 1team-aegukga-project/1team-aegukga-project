@@ -1,4 +1,4 @@
-# 🇰🇷 Aegukga Project (애국가 프로젝트)
+# 🇰🇷 Aegukga Project (애국가 프로젝트)(2026년 8월 2일까지 디스코드에 결과물과 GitHub 주소 제출)
 
 > **Aegukga Project**는 팀원 4명이 각자의 feature 브랜치에서 같은 파일의 같은 위치를 수정하고, Pull Request로 main에 병합하는 과정에서 Git 충돌(Merge Conflict)을 일부러 만들어보고 직접 해결하는 실습입니다. 애국가 1절 가사를 한 소절씩 나눠 맡아 코드를 완성해보세요!
 
